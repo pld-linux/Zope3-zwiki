@@ -1,4 +1,4 @@
-%define 	zope_subname	ZWiki
+%define 	zope_subname	zwiki
 Summary:	Zope product which allows you to build wiki webs in Zope
 Summary(pl):	Produkt Zope umo¿liwiaj±cy budowanie stron WWW typu wiki
 Name:		Zope3-%{zope_subname}
@@ -48,20 +48,20 @@ mv $RPM_BUILD_ROOT%{_prefix}/zopeskel $RPM_BUILD_ROOT%{_sysconfdir}/zope3
 %py_ocomp $RPM_BUILD_ROOT%{zope_pyscriptdir}
 %py_postclean
 
-ln -s %{_var}/spool/%{name} $RPM_BUILD_ROOT%{zope_pyscriptdir}/zwiki/mail-queue
+ln -s %{_var}/spool/%{name} $RPM_BUILD_ROOT%{zope_pyscriptdir}/%{zope_subname}/mail-queue
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-%{_sbindir}/installzope3package %{zope_pyscriptdir}/zwiki zwiki
+%{_sbindir}/installzope3package %{zope_pyscriptdir}/%{zope_subname} %{zope_subname}
 if [ -f /var/lock/subsys/zope3 ]; then
 	/etc/rc.d/init.d/zope3 restart >&2
 fi
 
 %postun
 if [ "$1" = "0" ]; then
-	%{_sbindir}/installzope3package -d zwiki
+	%{_sbindir}/installzope3package -d %{zope_subname}
 	if [ -f /var/lock/subsys/zope ]; then
 		/etc/rc.d/init.d/zope restart >&2
 	fi
