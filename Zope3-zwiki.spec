@@ -10,6 +10,7 @@ Source0:	http://www.zope.org/Products/Zope3-Packages/zwiki/%{version}/zwiki-%{ve
 # Source0-md5:	7a469eb4c313c40c89a4e0a47da27e8e
 URL:		http://www.zope.org/DevHome/Wikis/DevSite/Projects/ComponentArchitecture/ZwikiForZope3
 BuildRequires:	python
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,postun):	/usr/sbin/installzope3package
 %pyrequires_eq	python-modules
 Requires:	Zope3
@@ -39,8 +40,8 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/zope3
 install -d $RPM_BUILD_ROOT%{_var}/spool/%{name}/{tmp,new,cur}
 
 python install.py install \
-        --root="$RPM_BUILD_ROOT" \
-        --install-purelib="%{zope_pyscriptdir}"
+	--root="$RPM_BUILD_ROOT" \
+	--install-purelib="%{zope_pyscriptdir}"
 
 mv $RPM_BUILD_ROOT%{_prefix}/zopeskel $RPM_BUILD_ROOT%{_sysconfdir}/zope3
 
@@ -55,16 +56,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %{_sbindir}/installzope3package %{zope_pyscriptdir}/%{zope_subname} %{zope_subname}
-if [ -f /var/lock/subsys/zope3 ]; then
-	/etc/rc.d/init.d/zope3 restart >&2
-fi
+%service -q zope3 restart
 
 %postun
 if [ "$1" = "0" ]; then
 	%{_sbindir}/installzope3package -d %{zope_subname}
-	if [ -f /var/lock/subsys/zope ]; then
-		/etc/rc.d/init.d/zope restart >&2
-	fi
+	%service -q zope3 restart
 fi
 
 %files
