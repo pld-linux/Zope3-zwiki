@@ -17,8 +17,8 @@ Requires:	Zope3
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         zope_libdir             /usr/lib/zope3
-%define         zope_pyscriptdir        /usr/share/zope3/lib/python
+%define		zope_libdir		/usr/lib/zope3
+%define		zope_pyscriptdir	/usr/share/zope3/lib/python
 
 %description
 ZWiki is a Zope product which allows you to build wiki webs in Zope.
