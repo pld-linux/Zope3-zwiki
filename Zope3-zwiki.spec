@@ -1,6 +1,6 @@
 %define 	zope_subname	zwiki
 Summary:	Zope product which allows you to build wiki webs in Zope
-Summary(pl):	Produkt Zope umo¿liwiaj±cy budowanie stron WWW typu wiki
+Summary(pl.UTF-8):   Produkt Zope umoÅ¼liwiajÄ…cy budowanie stron WWW typu wiki
 Name:		Zope3-%{zope_subname}
 Version:	3.0.0
 Release:	1
@@ -23,8 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 ZWiki is a Zope product which allows you to build wiki webs in Zope.
 
-%description -l pl
-ZWiki to produkt Zope umo¿liwiaj±cy budowanie stron WWW typu wiki.
+%description -l pl.UTF-8
+ZWiki to produkt Zope umoÅ¼liwiajÄ…cy budowanie stron WWW typu wiki.
 
 %prep
 %setup -q -n zwiki-%{version}
